@@ -49,7 +49,7 @@ jobs:
           timeout 1m repo sync || true
         timeout-minutes: 6
       - name: Initialize and Sync Repo for Local Manifest
-        if: ${{ inputs.choice }} == ROM_MANIFEST
+        if: ${{ inputs.choice }} == LOCAL_MANIFEST
         run: |
           mkdir workspace
           cd workspace
@@ -58,7 +58,7 @@ jobs:
           git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
           git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
           mv */*.xml manifest.xml
-          repo init --depth=1 -m manifest.xml
+          repo init --depth=1 -m default.xml
           timeout 1m repo sync || true
         timeout-minutes: 6
         id: pwd
