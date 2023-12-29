@@ -17,6 +17,14 @@ on:
         options:
         - ROM_MANIFEST
         - LOCAL_MANIFEST 
+      GIT_USERNAME:
+        description: 'GIT_USERNAME'
+        required: true
+        default: 'sounddrill31'
+      GIT_EMAIL:
+        description: 'GIT_EMAIL'
+        required: true
+        default: 'sounddrill31@gmail.com'
 
 jobs:
   build:
@@ -35,8 +43,8 @@ jobs:
           mkdir workspace
           cd workspace
           echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
-          git config --global user.name "sounddrill31"
-          git config --global user.email "sounddrill31@gmail.com"
+          git config --global user.name ${{ github.event.inputs.GIT_USERNAME }}
+          git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
           repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
           timeout 1m repo sync || true
         timeout-minutes: 6
@@ -46,8 +54,8 @@ jobs:
           mkdir workspace
           cd workspace
           echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
-          git config --global user.name "sounddrill31"
-          git config --global user.email "sounddrill31@gmail.com"
+          git config --global user.name ${{ github.event.inputs.GIT_USERNAME }}
+          git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
           git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
           mv */*.xml manifest.xml
           repo init --depth=1 -m manifest.xml
