@@ -11,6 +11,12 @@ on:
         description: 'MANIFEST_BRANCH'
         required: true
         default: 'twrp-12.1'
+      CHOICE:
+        type: choice
+        description: 'ROM or Local Manifest'
+        options:
+        - ROM_MANIFEST
+        - LOCAL_MANIFEST 
 
 jobs:
   build:
@@ -23,7 +29,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git-core python3-pip wget
           wget https://storage.googleapis.com/git-repo-downloads/repo && sudo mv repo /usr/bin/repo && sudo chmod a+x /usr/bin/repo
-      - name: Initialize and Sync Repo 
+      - name: Initialize and Sync Repo for ROM Manifest
+        if: ${{ inputs.choice }} == ROM_MANIFEST
         run: |
           mkdir workspace
           cd workspace
@@ -31,6 +38,20 @@ jobs:
           git config --global user.name "sounddrill31"
           git config --global user.email "sounddrill31@gmail.com"
           repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+          timeout 1m repo sync || true
+        timeout-minutes: 6
+        id: pwd
+      - name: Initialize and Sync Repo for Local Manifest
+        if: ${{ inputs.choice }} == ROM_MANIFEST
+        run: |
+          mkdir workspace
+          cd workspace
+          echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
+          git config --global user.name "sounddrill31"
+          git config --global user.email "sounddrill31@gmail.com"
+          git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+          mv */*.xml manifest.xml
+          repo init --depth=1 -m manifest.xml
           timeout 1m repo sync || true
         timeout-minutes: 6
         id: pwd
