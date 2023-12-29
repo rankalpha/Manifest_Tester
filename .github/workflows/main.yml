@@ -40,7 +40,6 @@ jobs:
           repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
           timeout 1m repo sync || true
         timeout-minutes: 6
-        id: pwd
       - name: Initialize and Sync Repo for Local Manifest
         if: ${{ inputs.choice }} == ROM_MANIFEST
         run: |
