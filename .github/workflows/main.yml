@@ -37,27 +37,30 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git-core python3-pip wget
           wget https://storage.googleapis.com/git-repo-downloads/repo && sudo mv repo /usr/bin/repo && sudo chmod a+x /usr/bin/repo
-      - name: Initialize and Sync Repo for ROM Manifest
-        if: ["${{ github.event.inputs.choice }}" == "ROM_MANIFEST"]; then
+      - name: Initialize and Sync Repo for Manifest
         run: |
           mkdir workspace
           cd workspace
           echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
           git config --global user.name ${{ github.event.inputs.GIT_USERNAME }}
           git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
-          repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+          if [ "${{ github.event.inputs.choice }}" == "ROM_MANIFEST" ]; then
+                repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+          else
+                git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}  .repo/local_manifests 
+                repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
           timeout 1m repo sync || true
         timeout-minutes: 6
-      - name: Initialize and Sync Repo for Local Manifest
-        if: ["${{ github.event.inputs.choice }}" == "LOCAL_MANIFEST"]; then
-        run: |
-          mkdir workspace
-          cd workspace
-          echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
-          git config --global user.name ${{ github.event.inputs.GIT_USERNAME }}
-          git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
-          git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}  .repo/local_manifests 
-          repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
-          timeout 1m repo sync || true
-        timeout-minutes: 6
-        id: pwd
+      #- name: Initialize and Sync Repo for Local Manifest
+      #  if: ["${{ github.event.inputs.choice }}" == "LOCAL_MANIFEST"]; then
+      #  run: |
+      #    mkdir workspace
+      #    cd workspace
+      #    echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
+      #    git config --global user.name ${{ github.event.inputs.GIT_USERNAME }}
+      #    git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
+      #    git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}  .repo/local_manifests 
+      #    repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
+      #    timeout 1m repo sync || true
+      #  timeout-minutes: 6
+      #  id: pwd
