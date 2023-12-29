@@ -38,7 +38,7 @@ jobs:
           sudo apt-get install -y git-core python3-pip wget
           wget https://storage.googleapis.com/git-repo-downloads/repo && sudo mv repo /usr/bin/repo && sudo chmod a+x /usr/bin/repo
       - name: Initialize and Sync Repo for ROM Manifest
-        if: ${{ inputs.choice }} == ROM_MANIFEST
+        if: ${{ inputs.choice }} == "ROM_MANIFEST"
         run: |
           mkdir workspace
           cd workspace
@@ -49,7 +49,7 @@ jobs:
           timeout 1m repo sync || true
         timeout-minutes: 6
       - name: Initialize and Sync Repo for Local Manifest
-        if: ${{ inputs.choice }} == LOCAL_MANIFEST
+        if: ${{ inputs.choice }} == "LOCAL_MANIFEST"
         run: |
           mkdir workspace
           cd workspace
