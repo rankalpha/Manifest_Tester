@@ -29,6 +29,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -65,3 +66,5 @@ jobs:
       #    timeout 1m repo sync || true
       #  timeout-minutes: 6
       #  id: pwd
+      - name: Cleanup
+        uses: rokibhasansagar/slimhub_actions@main
