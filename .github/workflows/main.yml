@@ -48,6 +48,7 @@ jobs:
             if [ "${{ github.event.inputs.choice }}" == "ROM_MANIFEST" ]; then
                   repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
             else
+                  rm -rf .repo/local_manifests
                   git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}  .repo/local_manifests 
                   repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
             fi
