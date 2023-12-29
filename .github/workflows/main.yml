@@ -68,5 +68,5 @@ jobs:
       #    timeout 1m repo sync || true
       #  timeout-minutes: 6
       #  id: pwd
-    strategy:
-      fail-fast: false
+    #strategy:
+    #  fail-fast: false
