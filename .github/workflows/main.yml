@@ -29,10 +29,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Cleanup
+        uses: rokibhasansagar/slimhub_actions@main        
       - name: Install repo tool
         run: |
           sudo apt-get update
@@ -52,7 +53,7 @@ jobs:
                   git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}  .repo/local_manifests 
                   repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
             fi
-          timeout 1m repo sync || true
+          timeout 1m repo sync --force-sync || true
         timeout-minutes: 6
       #- name: Initialize and Sync Repo for Local Manifest
       #  if: ["${{ github.event.inputs.choice }}" == "LOCAL_MANIFEST"]; then
@@ -67,5 +68,3 @@ jobs:
       #    timeout 1m repo sync || true
       #  timeout-minutes: 6
       #  id: pwd
-      - name: Cleanup
-        uses: rokibhasansagar/slimhub_actions@main
