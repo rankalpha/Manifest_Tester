@@ -44,11 +44,12 @@ jobs:
           echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
           git config --global user.name ${{ github.event.inputs.GIT_USERNAME }}
           git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
-          if [ "${{ github.event.inputs.choice }}" == "ROM_MANIFEST" ]; then
-                repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
-          else
-                git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}  .repo/local_manifests 
-                repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
+            if [ "${{ github.event.inputs.choice }}" == "ROM_MANIFEST" ]; then
+                  repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+            else
+                  git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}  .repo/local_manifests 
+                  repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
+            fi
           timeout 1m repo sync || true
         timeout-minutes: 6
       #- name: Initialize and Sync Repo for Local Manifest
