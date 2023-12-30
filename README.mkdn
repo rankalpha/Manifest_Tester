@@ -31,7 +31,8 @@ Observe the workflow you started. If any errors popped up, they will show at the
 
 # Credits:
 ### [AmogOS-Rom](https://github.com/AmogOS-Rom/android_manifest/commit/55fa85ce44f03df3fdd975a6fa6880d72774a5ac "manifest: Add workflow")
-
+ - [davigamer987](https://github.com/davigamer987)
+ - [SirRGB](https://github.com/SirRGB)
 
 # TO BE DONE/Mini Roadmap:
 1. Improve Readme
