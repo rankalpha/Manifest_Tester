@@ -61,7 +61,7 @@ jobs:
                   repo init --depth=1 -u ${{ github.event.inputs.ROM_MANIFEST_URL }} -b ${{ github.event.inputs.ROM_MANIFEST_BRANCH }} --git-lfs &&
                   git clone ${{ github.event.inputs.LOCAL_MANIFEST_URL }} -b ${{ github.event.inputs.LOCAL_MANIFEST_BRANCH }}  .repo/local_manifests 
             fi
-          timeout 1m repo sync --force-sync || true
+          timeout 1m repo sync --force-sync || true && echo "Your manifest works!"
         timeout-minutes: 6
       #- name: Initialize and Sync Repo for Local Manifest
       #  if: ["${{ github.event.inputs.choice }}" == "LOCAL_MANIFEST"]; then
