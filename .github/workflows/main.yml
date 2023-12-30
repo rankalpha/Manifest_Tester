@@ -3,17 +3,25 @@ name: Test your repo manifest repository
 on:
   workflow_dispatch:
     inputs:
-      MANIFEST_URL:
+      LOCAL_MANIFEST_URL:
+        description: 'LOCAL_MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
+        required: true
+        default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
+      LOCAL_MANIFEST_BRANCH:
+        description: 'LOCAL_MANIFEST_BRANCH'
+        required: true
+        default: 'twrp-12.1'
+      ROM_MANIFEST_URL:
         description: 'MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
         required: true
         default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
-      MANIFEST_BRANCH:
+      ROM_MANIFEST_BRANCH:
         description: 'MANIFEST_BRANCH'
         required: true
         default: 'twrp-12.1'
       CHOICE:
         type: choice
-        description: 'ROM or Local Manifest'
+        description: 'Which would you like to test?'
         options:
         - ROM_MANIFEST
         - LOCAL_MANIFEST 
@@ -47,11 +55,11 @@ jobs:
           git config --global user.name ${{ github.event.inputs.GIT_USERNAME }}
           git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
             if [ "${{ github.event.inputs.choice }}" == "ROM_MANIFEST" ]; then
-                  repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+                  repo init --depth=1 -u ${{ github.event.inputs.ROM_MANIFEST_URL }} -b ${{ github.event.inputs.ROM_MANIFEST_BRANCH }}
             else
                   rm -rf .repo/local_manifests &&
-                  repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1 &&
-                  git clone ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}  .repo/local_manifests 
+                  repo init --depth=1 -u ${{ github.event.inputs.ROM_MANIFEST_URL }} -b ${{ github.event.inputs.ROM_MANIFEST_BRANCH }} &&
+                  git clone ${{ github.event.inputs.LOCAL_MANIFEST_URL }} -b ${{ github.event.inputs.LOCAL_MANIFEST_BRANCH }}  .repo/local_manifests 
             fi
           timeout 1m repo sync --force-sync || true
         timeout-minutes: 6
