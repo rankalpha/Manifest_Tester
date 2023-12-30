@@ -26,7 +26,7 @@ c. Run the workflow.
 ### To look for errors:
 Observe the workflow you started. If any errors popped up, they will show at the end of the 5th step(Initialize and Sync Repo for Manifest). 
 
-**Just because action finished successfully, it does not mean manifest works!**
+**Just because action finished successfully, it does not mean the manifest works!**
 
 
 # Credits:
