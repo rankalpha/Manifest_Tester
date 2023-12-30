@@ -1,1 +1,31 @@
-Test your repo manifests, and local manifests!
+# Test your repo manifests, and local manifests!
+
+This allows you to test a local or ROM manifest you're working on!
+
+# How do I use this?
+## Step 1. Fork this repository to your github account
+
+## Step 2. Head over to actions tab
+
+## Step 3. Click on "Test your repo manifest repository" on left-hand-side menu
+
+## Step 4. Click on Run Workflow:
+
+### - To test your ROM Manifest: 
+a. change only ROM manifest and ROM manifest branch entries, ensuring that ROM_MANIFEST is selected.
+### - To test your Local manifest :
+a. change ROM manifest, ROM manifest branch, Local Manifest and local manifest entries, ensuring that LOCAL_MANIFEST is selected.
+b. Change Git username and email to your username and email
+c. Run the workflow.
+
+### To look for errors:
+Observe the workflow you started. If any errors popped up, they will show at the end of the 5th step(Initialize and Sync Repo for Manifest). Just because action finished successfully, it does not mean manifest works!
+
+
+# Credits:
+### [AmogOS-Rom](https://github.com/AmogOS-Rom/android_manifest/commit/55fa85ce44f03df3fdd975a6fa6880d72774a5ac "manifest: Add workflow")
+
+
+# TO BE DONE/Mini Roadmap:
+1. Improve Readme
+2. Make Script better
