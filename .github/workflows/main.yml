@@ -28,11 +28,9 @@ on:
       GIT_USERNAME:
         description: 'GIT_USERNAME'
         required: true
-        default: 'sounddrill31'
       GIT_EMAIL:
         description: 'GIT_EMAIL'
         required: true
-        default: 'sounddrill31@gmail.com'
 
 jobs:
   build:
