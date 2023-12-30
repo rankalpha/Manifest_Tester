@@ -63,3 +63,5 @@ jobs:
             fi
           timeout 1m repo sync --force-sync || true
         timeout-minutes: 6
+    strategy:
+        fail-fast: true
