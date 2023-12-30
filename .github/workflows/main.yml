@@ -55,10 +55,10 @@ jobs:
           git config --global user.name ${{ github.event.inputs.GIT_USERNAME }}
           git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
             if [ "${{ github.event.inputs.choice }}" == "ROM_MANIFEST" ]; then
-                  repo init --depth=1 -u ${{ github.event.inputs.ROM_MANIFEST_URL }} -b ${{ github.event.inputs.ROM_MANIFEST_BRANCH }}
+                  repo init --depth=1 -u ${{ github.event.inputs.ROM_MANIFEST_URL }} -b ${{ github.event.inputs.ROM_MANIFEST_BRANCH }} --git-lfs
             else
                   rm -rf .repo/local_manifests &&
-                  repo init --depth=1 -u ${{ github.event.inputs.ROM_MANIFEST_URL }} -b ${{ github.event.inputs.ROM_MANIFEST_BRANCH }} &&
+                  repo init --depth=1 -u ${{ github.event.inputs.ROM_MANIFEST_URL }} -b ${{ github.event.inputs.ROM_MANIFEST_BRANCH }} --git-lfs &&
                   git clone ${{ github.event.inputs.LOCAL_MANIFEST_URL }} -b ${{ github.event.inputs.LOCAL_MANIFEST_BRANCH }}  .repo/local_manifests 
             fi
           timeout 1m repo sync --force-sync || true
