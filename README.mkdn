@@ -12,10 +12,15 @@ This allows you to test a local or ROM manifest you're working on!
 ## Step 4. Click on Run Workflow:
 
 ### - To test your ROM Manifest: 
+
 a. change only ROM manifest and ROM manifest branch entries, ensuring that ROM_MANIFEST is selected.
+
 ### - To test your Local manifest :
+
 a. change ROM manifest, ROM manifest branch, Local Manifest and local manifest entries, ensuring that LOCAL_MANIFEST is selected.
+
 b. Change Git username and email to your username and email
+
 c. Run the workflow.
 
 ### To look for errors:
