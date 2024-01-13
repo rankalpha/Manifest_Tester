@@ -26,7 +26,6 @@ c. Run the workflow.
 ### To look for errors:
 Observe the workflow you started. If any errors popped up, they will show at the end of the 5th step(Initialize and Sync Repo for Manifest). If there is no output after "Cloning into '.repo/local_manifests'...", it succeeded.  
 
-**Just because build succeeded, it does not mean the manifest works! Check the output!**
 
 
 # Credits:
