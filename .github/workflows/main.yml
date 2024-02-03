@@ -59,7 +59,7 @@ jobs:
                   repo init --depth=1 -u ${{ github.event.inputs.ROM_MANIFEST_URL }} -b ${{ github.event.inputs.ROM_MANIFEST_BRANCH }} --git-lfs &&
                   git clone ${{ github.event.inputs.LOCAL_MANIFEST_URL }} -b ${{ github.event.inputs.LOCAL_MANIFEST_BRANCH }}  .repo/local_manifests 
             fi
-          timeout 1m repo sync --force-sync || { exit_code=$?; [ $exit_code -eq 124 ] || (echo "Error: Process failed with exit code $exit_code"; exit $exit_code); }
+          timeout 2m repo sync --force-sync || { exit_code=$?; [ $exit_code -eq 124 ] || (echo "Error: Process failed with exit code $exit_code"; exit $exit_code); }
         timeout-minutes: 10
     strategy:
         fail-fast: true
