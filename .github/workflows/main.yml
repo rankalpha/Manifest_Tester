@@ -38,8 +38,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Cleanup
-        run: rm -rf *
       - name: Install repo tool
         run: |
           sudo apt-get update
@@ -47,6 +45,7 @@ jobs:
           wget https://storage.googleapis.com/git-repo-downloads/repo && sudo mv repo /usr/bin/repo && sudo chmod a+x /usr/bin/repo
       - name: Initialize and Sync Repo for Manifest
         run: |
+          rm -rf workspace
           mkdir workspace
           cd workspace
           echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
