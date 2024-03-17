@@ -39,7 +39,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Cleanup
-        uses: rokibhasansagar/slimhub_actions@main        
+        run: rm -rf *
       - name: Install repo tool
         run: |
           sudo apt-get update
