@@ -25,12 +25,6 @@ on:
         options:
         - ROM_MANIFEST
         - LOCAL_MANIFEST 
-      GIT_USERNAME:
-        description: 'GIT_USERNAME'
-        required: true
-      GIT_EMAIL:
-        description: 'GIT_EMAIL'
-        required: true
 
 jobs:
   build:
@@ -49,8 +43,8 @@ jobs:
           mkdir workspace
           cd workspace
           echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
-          git config --global user.name ${{ github.event.inputs.GIT_USERNAME }}
-          git config --global user.email ${{ github.event.inputs.GIT_EMAIL }}
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
             if [ "${{ github.event.inputs.choice }}" == "ROM_MANIFEST" ]; then
                   repo init --depth=1 -u ${{ github.event.inputs.ROM_MANIFEST_URL }} -b ${{ github.event.inputs.ROM_MANIFEST_BRANCH }} --git-lfs
             else
