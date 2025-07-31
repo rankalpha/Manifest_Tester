@@ -14,7 +14,7 @@ on:
       ROM_MANIFEST_URL:
         description: 'MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
         required: true
-        default: 'https://github.com/ArrowOS/android_manifest'
+        default: 'https://github.com/rankalpha/arrow_android_manifest'
       ROM_MANIFEST_BRANCH:
         description: 'MANIFEST_BRANCH'
         required: true
