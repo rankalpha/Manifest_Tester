@@ -6,7 +6,7 @@ on:
       LOCAL_MANIFEST_URL:
         description: 'LOCAL_MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
         required: true
-        default: 'https://github.com/sounddrill31/local_manifests'
+        default: 'https://github.com/rankalpha/arrow_local_manifest'
       LOCAL_MANIFEST_BRANCH:
         description: 'LOCAL_MANIFEST_BRANCH'
         required: true
@@ -14,11 +14,11 @@ on:
       ROM_MANIFEST_URL:
         description: 'MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
         required: true
-        default: 'https://github.com/LineageOS/android'
+        default: 'https://github.com/ArrowOS/android_manifest'
       ROM_MANIFEST_BRANCH:
         description: 'MANIFEST_BRANCH'
         required: true
-        default: 'lineage-20.0'
+        default: 'arrow-13.1'
       CHOICE:
         type: choice
         description: 'Which would you like to test?'
