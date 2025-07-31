@@ -10,7 +10,7 @@ on:
       LOCAL_MANIFEST_BRANCH:
         description: 'LOCAL_MANIFEST_BRANCH'
         required: true
-        default: 'lineage-oxygen'
+        default: 'arrow13-4.19'
       ROM_MANIFEST_URL:
         description: 'MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
         required: true
